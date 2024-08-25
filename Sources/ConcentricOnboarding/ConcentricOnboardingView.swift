@@ -28,6 +28,7 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
     
     /// defaults setups, will be change via modifiers
     private var nextIcon: String = "chevron.forward"
+    private var iconSize:CGSize = CGSize(width: 10, height: 20)
     private var duration: Double = 1.0
     
     /// called before animation starts
@@ -120,7 +121,7 @@ public struct ConcentricOnboardingView<Content>: View, Animatable where Content:
         Image(systemName: nextIcon)
             .resizable()
             .aspectRatio(contentMode: .fit)
-            .frame(width: 10, height: 20)
+            .frame(width: iconSize.width,height: iconSize.height)
             .foregroundColor(backgroundColor)
     }
     
@@ -256,9 +257,12 @@ extension ConcentricOnboardingView {
         return concentricOnboardingView
     }
     
-    public func nextIcon(_ iconName: String) -> ConcentricOnboardingView {
+    public func nextIcon(_ iconName: String,size: CGSize?) -> ConcentricOnboardingView {
         var concentricOnboardingView = self
         concentricOnboardingView.nextIcon = iconName
+        if let size = size {
+            concentricOnboardingView.iconSize = size
+        }
         return concentricOnboardingView
     }
 }
